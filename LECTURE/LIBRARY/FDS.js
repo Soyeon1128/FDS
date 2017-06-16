@@ -218,7 +218,7 @@ var FDS = function(global){
   var hasChild = function(node) {
     validateElementNode(node);
     return node.hasChildNodes();
-  }
+  };
 
   // ——————————————————————————————————————
   // DOM 생성/조작 API: 유틸리티 함수
@@ -245,7 +245,40 @@ var FDS = function(global){
     }
     return el;
   };
-
+  var insertBefore = function(insert, target) {
+    validateElementNode(insert);
+    validateElementNode(target);
+    parent(target).insertBefore(insert, target);
+    return insert;
+  };
+  var before = function(target, insert) {
+    return insertBefore(insert, target);
+  };
+  var prependChild = function(parent, child) {
+    validateElementNode(parent);
+    validateElementNode(child);
+    var target = firstChild(parent);
+    return target ? insertBefore(child, target) : appendChild(parent, child);
+  };
+  var insertAfter = function(insert, target) {
+    // target 뒤에 형제가 있나?
+    var next = nextSibling(target);
+    // 형제가 있으면?
+    if ( next ) {
+      insertBefore(insert, next);
+    }
+    // 형제가 없으면?
+    else {
+      appendChild(insert, parent(target));
+    }
+    return insert;
+  };
+  var after = function(target, insert) {
+    return insertAfter(insert, target);
+  };
+  var removeChild = function(child) {
+    return parent(child).removeChild(child);
+  };
 
   // ---------------------------------------
   // 반환: FDS 네임스페이스 객체
@@ -292,7 +325,12 @@ var FDS = function(global){
     // DOM 생성/조작 API: 유틸리티
     createEl: createEl,
     appendChild: appendChild,
-
+    prependChild: prependChild,
+    removeChild: removeChild,
+    insertBefore: insertBefore,
+    insertAfter: insertAfter,
+    before: before,
+    after: after,
   };
 
 }(window);
