@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css">
   <style>
-  .container {
-    max-width: 1080px;
-  }
-  .memo {
-    padding: 10px;
+  .app.container {
+    margin: 1rem 2rem;
   }
   .memo > * {
     margin-bottom: 10px;
@@ -25,11 +22,8 @@
 </head>
 <body>
 
-  <div class="container is-fluid">
+  <div class="app container is-fluid">
     <div class="columns">
-      <div class="column is-9">
-
-      </div>
       <div class="column is-3">
         <div class="memo box">
           <label class="sr-only" for="memo-title">메모 제목</label>
@@ -55,6 +49,21 @@
               <span>입력 취소</span>
             </button>
           </div>
+        </div>
+      </div>
+      <div class="column is-9">
+        <div class="columns is-multiline">
+
+          <article class="memo-item column is-3 message is-primary">
+            <div class="message-header">
+              <h5 class="memo-item-title">메모 타이틀</h5>
+              <button type="button" class="delete" aria-label="메모 아이템 제거"></button>
+            </div>
+            <div class="message-body">
+              <p class="memo-item-content">메모 내용</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </div>
